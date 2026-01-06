@@ -1,0 +1,68 @@
+---
+BasedOnStyle: LLVM
+Language: Cpp
+Standard: Latest
+ColumnLimit: 120
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+
+# Alignment
+PointerAlignment: Left
+ReferenceAlignment: Left
+DerivePointerAlignment: false
+
+# Templates
+AlwaysBreakTemplateDeclarations: Yes
+
+# Constructors
+BreakConstructorInitializers: BeforeColon
+ConstructorInitializerIndentWidth: 4
+PackConstructorInitializers: NextLine
+
+# C++11+ syntax
+Cpp11BracedListStyle: true
+
+# Functions
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortLambdasOnASingleLine: All
+AlwaysBreakAfterReturnType: None
+IndentWrappedFunctionNames: false
+BinPackArguments: false
+BinPackParameters: false
+
+# Includes
+SortIncludes: CaseSensitive
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^<.*\.h>'
+    Priority: 1
+  - Regex: '^<.*>'
+    Priority: 2
+  - Regex: '.*'
+    Priority: 3
+
+# Spacing
+SpaceAfterTemplateKeyword: true
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeRangeBasedForLoopColon: true
+SpacesInAngles: Never
+
+# Braces
+BreakBeforeBraces: Allman
+InsertBraces: true
+IndentCaseLabels: true
+
+# Concepts
+RequiresClausePosition: OwnLine
+RequiresExpressionIndentation: OuterScope
+IndentRequiresClause: true
+
+# Separation
+SeparateDefinitionBlocks: Always
+EmptyLineBeforeAccessModifier: Always
+AccessModifierOffset: -4
+
+# Qualifiers
+QualifierAlignment: Leave

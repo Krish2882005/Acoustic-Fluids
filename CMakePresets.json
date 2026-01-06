@@ -24,6 +24,14 @@
             "name": "windows",
             "displayName": "Windows x64",
             "inherits": "windows-base"
+        },
+        {
+            "name": "windows-tidy",
+            "displayName": "Windows x64 (Clang-Tidy)",
+            "inherits": "windows-base",
+            "cacheVariables": {
+                "CMAKE_CXX_CLANG_TIDY": "clang-tidy;--header-filter=src[\\\\/];--extra-arg=/EHsc"
+            }
         }
     ],
     "buildPresets": [
@@ -44,6 +52,12 @@
             "displayName": "RelWithDebInfo",
             "configurePreset": "windows",
             "configuration": "RelWithDebInfo"
+        },
+        {
+            "name": "tidy-check",
+            "displayName": "Debug (clang-tidy)",
+            "configurePreset": "windows-tidy",
+            "configuration": "Debug"
         }
     ]
 }
