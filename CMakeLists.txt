@@ -11,8 +11,21 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(SDL3 CONFIG REQUIRED)
 
+add_executable(AcousticFluids) 
+
+target_sources(AcousticFluids PRIVATE
+    src/Core/Config.hpp
+    src/Core/Window.hpp
+    src/Core/Window.cpp
+    src/Graphics/GPUContext.hpp
+    src/Graphics/GPUContext.cpp
+)
+
+target_include_directories(AcousticFluids PRIVATE src)
+target_link_libraries(AcousticFluids PRIVATE SDL3::SDL3)
+
 if(MSVC)
-    add_compile_options(/W4 /permissive-)
+    target_compile_options(AcousticFluids PRIVATE /W4 /permissive- /Zc:__cplusplus /EHsc /utf-8)
 else()
-    add_compile_options(-Wall -Wextra -Wpedantic)
+    target_compile_options(AcousticFluids PRIVATE -Wall -Wextra -Wpedantic)
 endif()
