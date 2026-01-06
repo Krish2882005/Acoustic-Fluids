@@ -19,6 +19,8 @@ target_sources(AcousticFluids PRIVATE
     src/Core/Window.cpp
     src/Graphics/GPUContext.hpp
     src/Graphics/GPUContext.cpp
+    src/Graphics/Renderer.hpp
+    src/Graphics/Renderer.cpp
 )
 
 target_include_directories(AcousticFluids PRIVATE src)
