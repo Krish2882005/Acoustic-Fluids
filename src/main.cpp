@@ -1,12 +1,13 @@
-#include <cstdio>
 #include <exception>
-#include <print>
 
 #include "Core/Config.hpp"
 #include "Core/Engine.hpp"
+#include "Core/Logger.hpp"
 
 int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 {
+    Core::Logger::Init();
+
     try
     {
         Core::Config config{};
@@ -23,14 +24,16 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
     }
     catch (const std::exception& e)
     {
-        std::println(stderr, "Fatal Error: {}", e.what());
+        LOG_ERROR("Fatal Error: {}", e.what());
         return -1;
     }
     catch (...)
     {
-        std::println(stderr, "Fatal Error: Unknown exception occurred.");
+        LOG_ERROR("Fatal Error: Unknown exception occurred.");
         return -1;
     }
+
+    Core::Logger::Shutdown();
 
     return 0;
 }

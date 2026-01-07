@@ -5,13 +5,13 @@
 #include <algorithm>
 #include <cstdint>
 #include <memory>
-#include <print>
 #include <stdexcept>
 
 #include "../Graphics/GPUContext.hpp"
 #include "../Graphics/Renderer.hpp"
 #include "Clock.hpp"
 #include "Config.hpp"
+#include "Logger.hpp"
 #include "Window.hpp"
 
 namespace Core
@@ -25,7 +25,7 @@ constexpr double kNanosecondsPerSecond = 1.0e9;
 
 SDLContext::SDLContext()
 {
-    std::println("Engine: Initializing SDL...");
+    LOG_INFO("Engine: Initializing SDL...");
 
     if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO))
     {
@@ -35,13 +35,13 @@ SDLContext::SDLContext()
 
 SDLContext::~SDLContext()
 {
-    std::println("Engine: Shutting down SDL...");
+    LOG_INFO("Engine: Shutting down SDL...");
     SDL_Quit();
 }
 
 Engine::Engine(const Config& config) : m_config(config), m_isRunning(true)
 {
-    std::println("Engine: Initializing Subsystems...");
+    LOG_INFO("Engine: Initializing Subsystems...");
 
     m_window = std::make_unique<Window>(config.WindowTitle, config.WindowWidth, config.WindowHeight);
 
@@ -50,7 +50,7 @@ Engine::Engine(const Config& config) : m_config(config), m_isRunning(true)
 
     m_renderer = std::make_unique<Graphics::Renderer>(m_gpuContext.get());
 
-    std::println("Engine: Initialized subsystems!");
+    LOG_INFO("Engine: Initialized subsystems!");
 }
 
 Engine::~Engine() = default;

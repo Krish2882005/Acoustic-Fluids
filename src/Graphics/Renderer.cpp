@@ -2,9 +2,7 @@
 
 #include <SDL3/SDL.h>
 
-#include <cstdio>
-#include <print>
-
+#include "../Core/Logger.hpp"
 #include "GPUContext.hpp"
 
 namespace Graphics
@@ -18,7 +16,7 @@ constexpr float kOpaqueAlpha = 1.0F;
 Renderer::Renderer(GPUContext* context)
     : m_context(context), m_clearColor(kDefaultClearColor, kDefaultClearColor, kDefaultClearColor, kOpaqueAlpha)
 {
-    std::println("Renderer: System initialized");
+    LOG_INFO("Renderer: System initialized");
 }
 
 void Renderer::Draw(double alpha)
@@ -46,7 +44,7 @@ void Renderer::Draw(double alpha)
     }
     else
     {
-        std::println(stderr, "Renderer Error: Failed to begin render pass: {}", SDL_GetError());
+        LOG_ERROR("Renderer: Failed to begin render pass: {} ", SDL_GetError());
     }
 }
 

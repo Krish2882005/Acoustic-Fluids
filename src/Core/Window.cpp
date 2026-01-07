@@ -3,9 +3,10 @@
 #include <SDL3/SDL.h>
 
 #include <cstdint>
-#include <print>
 #include <stdexcept>
 #include <string>
+
+#include "Logger.hpp"
 
 namespace Core
 {
@@ -29,7 +30,7 @@ Window::Window(const std::string& title, uint32_t width, uint32_t height) : m_wi
         throw std::runtime_error(SDL_GetError());
     }
 
-    std::println("Window: Created '{}' ({}x{})", title, width, height);
+    LOG_INFO("Window: Created '{}' ({}x{})", title, width, height);
 }
 
 Window::~Window() = default;
@@ -42,7 +43,7 @@ void Window::OnResize(uint32_t width, uint32_t height)
     m_width = width;
     m_height = height;
 
-    std::println("Window: Resized to {}x{}", width, height);
+    LOG_INFO("Window: Resized to {}x{}", width, height);
 }
 
 SDL_Window* Window::GetNativeHandle() const

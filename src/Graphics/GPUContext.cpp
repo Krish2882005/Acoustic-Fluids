@@ -2,9 +2,9 @@
 
 #include <SDL3/SDL.h>
 
-#include <cstdio>
-#include <print>
 #include <stdexcept>
+
+#include "../Core/Logger.hpp"
 
 namespace Graphics
 {
@@ -27,7 +27,7 @@ GPUContext::GPUContext(SDL_Window* window, bool debugMode) : m_windowHandle(wind
     }
 
     const char* backend = SDL_GetGPUDeviceDriver(m_device.get());
-    std::println("GPU: Device created using backend: {}", backend ? backend : "Unknown");
+    LOG_INFO("GPU: Device created using backend: {}", backend ? backend : "Unknown");
 
     if (m_windowHandle)
     {
@@ -60,7 +60,7 @@ void GPUContext::BeginFrame()
 
     if (!m_currentCmdBuffer)
     {
-        std::println(stderr, "GPU Error: Failed to acquire command buffer: {}", SDL_GetError());
+        LOG_ERROR("GPU: Failed to acquire command buffer: {}", SDL_GetError());
         return;
     }
 
@@ -68,7 +68,7 @@ void GPUContext::BeginFrame()
             m_currentCmdBuffer, m_windowHandle, &m_swapchainTexture, nullptr, nullptr))
     {
         m_swapchainTexture = nullptr;
-        std::println(stderr, "GPU Error: Failed to acquire swapchain: {}", SDL_GetError());
+        LOG_ERROR("GPU: Failed to acquire swapchain texture: {}", SDL_GetError());
     }
 }
 
@@ -78,7 +78,7 @@ void GPUContext::EndFrame()
     {
         if (!SDL_SubmitGPUCommandBuffer(m_currentCmdBuffer))
         {
-            std::println(stderr, "GPU Error: Submission failed: {}", SDL_GetError());
+            LOG_ERROR("GPU: Failed to submit command buffer: {}", SDL_GetError());
         }
 
         m_currentCmdBuffer = nullptr;
@@ -98,7 +98,7 @@ void GPUContext::SetVSync(bool enabled)
                                        SDL_GPU_SWAPCHAINCOMPOSITION_SDR,
                                        enabled ? SDL_GPU_PRESENTMODE_VSYNC : SDL_GPU_PRESENTMODE_IMMEDIATE))
     {
-        std::println(stderr, "GPU Warning: Failed to set VSync: {}", SDL_GetError());
+        LOG_WARN("GPU: Failed to set VSync: {}", SDL_GetError());
     }
 }
 
