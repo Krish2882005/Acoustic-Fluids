@@ -14,7 +14,12 @@ find_package(SDL3 CONFIG REQUIRED)
 add_executable(AcousticFluids) 
 
 target_sources(AcousticFluids PRIVATE
+    src/main.cpp
+    src/Core/Clock.hpp
+    src/Core/Clock.cpp
     src/Core/Config.hpp
+    src/Core/Engine.hpp
+    src/Core/Engine.cpp
     src/Core/Window.hpp
     src/Core/Window.cpp
     src/Graphics/GPUContext.hpp
