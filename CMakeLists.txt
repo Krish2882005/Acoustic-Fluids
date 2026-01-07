@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(SDL3 CONFIG REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
 
 add_executable(AcousticFluids) 
 
@@ -20,6 +21,8 @@ target_sources(AcousticFluids PRIVATE
     src/Core/Config.hpp
     src/Core/Engine.hpp
     src/Core/Engine.cpp
+    src/Core/Logger.hpp
+    src/Core/Logger.cpp
     src/Core/Window.hpp
     src/Core/Window.cpp
     src/Graphics/GPUContext.hpp
@@ -29,7 +32,7 @@ target_sources(AcousticFluids PRIVATE
 )
 
 target_include_directories(AcousticFluids PRIVATE src)
-target_link_libraries(AcousticFluids PRIVATE SDL3::SDL3)
+target_link_libraries(AcousticFluids PRIVATE SDL3::SDL3 spdlog::spdlog)
 
 if(MSVC)
     target_compile_options(AcousticFluids PRIVATE /W4 /permissive- /Zc:__cplusplus /EHsc /utf-8)

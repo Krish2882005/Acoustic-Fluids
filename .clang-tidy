@@ -64,6 +64,10 @@ CheckOptions:
     value: ''
   - key: readability-identifier-naming.PublicMemberCase
     value: CamelCase
+  - key: readability-identifier-naming.ClassMemberCase
+    value: CamelCase
+  - key: readability-identifier-naming.ClassMemberPrefix
+    value: s_
 
   # Globals & Constants
   - key: readability-identifier-naming.GlobalVariableCase
