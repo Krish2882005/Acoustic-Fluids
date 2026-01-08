@@ -29,6 +29,8 @@ target_sources(AcousticFluids PRIVATE
     src/Graphics/GPUContext.cpp
     src/Graphics/Renderer.hpp
     src/Graphics/Renderer.cpp
+    src/Graphics/TextureRegistry.hpp
+    src/Graphics/TextureRegistry.cpp
 )
 
 target_include_directories(AcousticFluids PRIVATE src)
