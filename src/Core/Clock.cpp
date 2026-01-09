@@ -6,14 +6,7 @@
 
 namespace Core
 {
-Clock::Clock() : m_startTick(SDL_GetPerformanceCounter()), m_lastTick(m_startTick) {}
-
-double Clock::GetDeltaSeconds() const
-{
-    const uint64_t currentTick = SDL_GetPerformanceCounter();
-    const uint64_t diff = currentTick - m_lastTick;
-    return static_cast<double>(diff) / static_cast<double>(SDL_GetPerformanceFrequency());
-}
+Clock::Clock() : m_startTick(SDL_GetPerformanceCounter()) {}
 
 double Clock::GetTotalSeconds() const
 {
