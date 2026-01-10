@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(SDL3 CONFIG REQUIRED)
+find_package(SDL3_shadercross CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 
 add_executable(AcousticFluids) 
@@ -34,7 +35,7 @@ target_sources(AcousticFluids PRIVATE
 )
 
 target_include_directories(AcousticFluids PRIVATE src)
-target_link_libraries(AcousticFluids PRIVATE SDL3::SDL3 spdlog::spdlog)
+target_link_libraries(AcousticFluids PRIVATE SDL3::SDL3 spdlog::spdlog SDL3_shadercross::SDL3_shadercross)
 
 if(MSVC)
     target_compile_options(AcousticFluids PRIVATE /W4 /permissive- /Zc:__cplusplus /EHsc /utf-8)

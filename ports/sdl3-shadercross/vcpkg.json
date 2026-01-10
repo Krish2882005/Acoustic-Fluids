@@ -1,0 +1,20 @@
+{
+  "name": "sdl3-shadercross",
+  "version": "1.0.0",
+  "dependencies": [
+    {
+      "name": "directx-dxc",
+      "platform": "windows"
+    },
+    "sdl3",
+    "spirv-cross",
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    }
+  ]
+}
