@@ -28,8 +28,14 @@ target_sources(AcousticFluids PRIVATE
     src/Core/Window.cpp
     src/Graphics/GPUContext.hpp
     src/Graphics/GPUContext.cpp
+    src/Graphics/PipelineBuilder.hpp
+    src/Graphics/PipelineBuilder.cpp
     src/Graphics/Renderer.hpp
     src/Graphics/Renderer.cpp
+    src/Graphics/Shader.cpp
+    src/Graphics/Shader.cpp
+    src/Graphics/ShaderLibrary.hpp
+    src/Graphics/ShaderLibrary.cpp
     src/Graphics/TextureRegistry.hpp
     src/Graphics/TextureRegistry.cpp
 )
