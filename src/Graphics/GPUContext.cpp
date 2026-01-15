@@ -16,6 +16,24 @@ void GPUContext::GPUDeviceDestroyer::operator()(SDL_GPUDevice* device) const
     }
 }
 
+namespace
+{
+void LogGPUSpecs(SDL_GPUDevice* device)
+{
+    const SDL_PropertiesID props = SDL_GetGPUDeviceProperties(device);
+
+    const char* name = SDL_GetStringProperty(props, SDL_PROP_GPU_DEVICE_NAME_STRING, "Unknown");
+    const char* driver = SDL_GetStringProperty(props, SDL_PROP_GPU_DEVICE_DRIVER_NAME_STRING, "Unknown");
+    const char* version = SDL_GetStringProperty(props, SDL_PROP_GPU_DEVICE_DRIVER_VERSION_STRING, "Unknown");
+    const char* info = SDL_GetStringProperty(props, SDL_PROP_GPU_DEVICE_DRIVER_INFO_STRING, "Unknown");
+
+    LOG_INFO("GPU Device: {}", name);
+    LOG_INFO("Driver Name: {}", driver);
+    LOG_INFO("Driver Version: {}", version);
+    LOG_INFO("Driver Details: {}", info);
+}
+} // namespace
+
 GPUContext::GPUContext(SDL_Window* window, bool debugMode) : m_windowHandle(window)
 {
     m_device.reset(SDL_CreateGPUDevice(
@@ -25,6 +43,8 @@ GPUContext::GPUContext(SDL_Window* window, bool debugMode) : m_windowHandle(wind
     {
         throw std::runtime_error(SDL_GetError());
     }
+
+    LogGPUSpecs(m_device.get());
 
     const char* backend = SDL_GetGPUDeviceDriver(m_device.get());
     LOG_INFO("GPU: Device created using backend: {}", backend ? backend : "Unknown");
