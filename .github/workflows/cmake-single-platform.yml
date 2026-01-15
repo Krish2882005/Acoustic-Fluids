@@ -10,12 +10,15 @@ jobs:
   build:
     name: Windows x64
     runs-on: windows-latest
+    env:
+      BUILD_WRAPPER_OUT_DIR: build_wrapper_output_directory 
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
           submodules: recursive
+          fetch-depth: 0
 
       - name: Setup CMake and Ninja
         uses: lukka/get-cmake@latest
@@ -29,9 +32,20 @@ jobs:
         with:
           vcpkgJsonGlob: 'vcpkg.json'
 
+      - name: Install Build Wrapper
+        uses: SonarSource/sonarqube-scan-action/install-build-wrapper@v6
+
       - name: Configure CMake
         run: cmake --preset windows
 
       - name: Build Release
-        run: cmake --build --preset release
-        
+        run: |
+          build-wrapper-win-x86-64.exe --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build --preset release
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v6
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            --define sonar.cfamily.compile-commands=${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json
