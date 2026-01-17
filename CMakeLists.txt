@@ -32,7 +32,7 @@ target_sources(AcousticFluids PRIVATE
     src/Graphics/PipelineBuilder.cpp
     src/Graphics/Renderer.hpp
     src/Graphics/Renderer.cpp
-    src/Graphics/Shader.cpp
+    src/Graphics/Shader.hpp
     src/Graphics/Shader.cpp
     src/Graphics/ShaderLibrary.hpp
     src/Graphics/ShaderLibrary.cpp
