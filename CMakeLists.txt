@@ -13,6 +13,9 @@ find_package(SDL3 CONFIG REQUIRED)
 find_package(SDL3_shadercross CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 
+find_path(MINIAUDIO_INCLUDE_DIRS "miniaudio.h")
+find_path(POCKETFFT_INCLUDE_DIRS "pocketfft_hdronly.h")
+
 add_executable(AcousticFluids) 
 
 target_sources(AcousticFluids PRIVATE
@@ -41,6 +44,7 @@ target_sources(AcousticFluids PRIVATE
 )
 
 target_include_directories(AcousticFluids PRIVATE src)
+target_include_directories(AcousticFluids SYSTEM PRIVATE ${POCKETFFT_INCLUDE_DIRS} ${MINIAUDIO_INCLUDE_DIRS})
 target_link_libraries(AcousticFluids PRIVATE SDL3::SDL3 spdlog::spdlog SDL3_shadercross::SDL3_shadercross)
 
 if(MSVC)

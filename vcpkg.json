@@ -2,6 +2,8 @@
   "name": "acoustic-fluids",
   "version": "0.1.0",
   "dependencies": [
+    "miniaudio",
+    "pocketfft",
     "sdl3",
     "sdl3-shadercross",
     "spdlog"
