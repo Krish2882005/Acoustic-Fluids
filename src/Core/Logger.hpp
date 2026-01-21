@@ -14,6 +14,18 @@ public:
 
     static std::shared_ptr<spdlog::logger>& GetLogger();
 
+    struct Scoped
+    {
+        Scoped() { Logger::Init(); }
+
+        ~Scoped() { Logger::Shutdown(); }
+
+        Scoped(const Scoped&) = delete;
+        Scoped& operator=(const Scoped&) = delete;
+        Scoped(Scoped&&) = delete;
+        Scoped& operator=(Scoped&&) = delete;
+    };
+
 private:
     static std::shared_ptr<spdlog::logger> s_Logger;
 };

@@ -6,7 +6,7 @@
 
 int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 {
-    Core::Logger::Init();
+    const Core::Logger::Scoped loggerScope;
 
     try
     {
@@ -32,8 +32,6 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
         LOG_ERROR("Fatal Error: Unknown exception occurred.");
         return -1;
     }
-
-    Core::Logger::Shutdown();
 
     return 0;
 }
