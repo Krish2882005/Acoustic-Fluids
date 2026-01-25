@@ -20,6 +20,11 @@ add_executable(AcousticFluids)
 
 target_sources(AcousticFluids PRIVATE
     src/main.cpp
+    src/Audio/AudioConfig.hpp
+    src/Audio/AudioDriver.hpp
+    src/Audio/AudioDriver.cpp
+    src/Audio/AudioRingBuffer.hpp
+    src/Audio/AudioRingBuffer.cpp
     src/Core/Clock.hpp
     src/Core/Clock.cpp
     src/Core/Config.hpp
