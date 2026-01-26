@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <stdexcept>
 #include <string>
+#include <utility>
 
 #include "../Core/Logger.hpp"
 #include "GPUContext.hpp"
@@ -65,7 +66,7 @@ void TextureRegistry::CreatePingPong(const std::string& name, uint32_t width, ui
     if (!SDL_GPUTextureSupportsFormat(device, chosenFormat, SDL_GPU_TEXTURETYPE_2D, requiredUsage))
     {
         LOG_WARN("TextureRegistry: Format {} not supported for Compute/Sample. Trying fallback...",
-                 static_cast<uint32_t>(chosenFormat));
+                 std::to_underlying(chosenFormat));
 
         if (chosenFormat == SDL_GPU_TEXTUREFORMAT_R16_FLOAT)
         {
@@ -100,7 +101,7 @@ void TextureRegistry::CreatePingPong(const std::string& name, uint32_t width, ui
              name,
              width,
              height,
-             static_cast<uint32_t>(chosenFormat));
+             std::to_underlying(chosenFormat));
 }
 
 Texture2D

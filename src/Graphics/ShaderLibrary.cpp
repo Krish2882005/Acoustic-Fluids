@@ -192,6 +192,8 @@ ShaderLibrary::CompileToSPIRV(const std::string& source, ShaderStage stage, cons
         case ShaderStage::Compute:
             hlslInfo.shader_stage = SDL_SHADERCROSS_SHADERSTAGE_COMPUTE;
             break;
+        default:
+            std::unreachable();
     }
 
     size_t size = 0;
