@@ -25,6 +25,8 @@ target_sources(AcousticFluids PRIVATE
     src/Audio/AudioDriver.cpp
     src/Audio/AudioRingBuffer.hpp
     src/Audio/AudioRingBuffer.cpp
+    src/Audio/FFTAnalyzer.hpp
+    src/Audio/FFTAnalyzer.cpp
     src/Core/Clock.hpp
     src/Core/Clock.cpp
     src/Core/Config.hpp
@@ -32,6 +34,7 @@ target_sources(AcousticFluids PRIVATE
     src/Core/Engine.cpp
     src/Core/Logger.hpp
     src/Core/Logger.cpp
+    src/Core/PhysicsTypes.hpp
     src/Core/Window.hpp
     src/Core/Window.cpp
     src/Graphics/GPUContext.hpp
