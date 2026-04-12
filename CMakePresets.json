@@ -60,5 +60,25 @@
             "configurePreset": "windows-tidy",
             "configuration": "Debug"
         }
+    ],
+    "testPresets": [
+        {
+            "name": "debug",
+            "displayName": "Run Tests (Debug)",
+            "configurePreset": "windows",
+            "configuration": "Debug",
+            "output": {
+                "outputOnFailure": true
+            }
+        },
+        {
+            "name": "release",
+            "displayName": "Run Tests (Release)",
+            "configurePreset": "windows",
+            "configuration": "Release",
+            "output": {
+                "outputOnFailure": true
+            }
+        }
     ]
 }
