@@ -64,7 +64,9 @@ add_executable(AcousticFluids src/main.cpp)
 target_link_libraries(AcousticFluids PRIVATE AcousticFluidsCore)
 
 enable_testing()
-add_executable(AcousticFluidsTests tests/test_main.cpp)
+add_executable(AcousticFluidsTests 
+    tests/FFTAnalyzerTests.cpp
+)
 target_link_libraries(AcousticFluidsTests PRIVATE AcousticFluidsCore Catch2::Catch2WithMain)
 
 include(CTest)
