@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+find_package(Catch2 CONFIG REQUIRED)
 find_package(SDL3 CONFIG REQUIRED)
 find_package(SDL3_shadercross CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
@@ -16,10 +17,8 @@ find_package(spdlog CONFIG REQUIRED)
 find_path(MINIAUDIO_INCLUDE_DIRS "miniaudio.h")
 find_path(POCKETFFT_INCLUDE_DIRS "pocketfft_hdronly.h")
 
-add_executable(AcousticFluids) 
-
-target_sources(AcousticFluids PRIVATE
-    src/main.cpp
+add_library(AcousticFluidsCore OBJECT)
+target_sources(AcousticFluidsCore PRIVATE
     src/Audio/AudioConfig.hpp
     src/Audio/AudioDriver.hpp
     src/Audio/AudioDriver.cpp
@@ -51,12 +50,23 @@ target_sources(AcousticFluids PRIVATE
     src/Graphics/TextureRegistry.cpp
 )
 
-target_include_directories(AcousticFluids PRIVATE src)
-target_include_directories(AcousticFluids SYSTEM PRIVATE ${POCKETFFT_INCLUDE_DIRS} ${MINIAUDIO_INCLUDE_DIRS})
-target_link_libraries(AcousticFluids PRIVATE SDL3::SDL3 spdlog::spdlog SDL3_shadercross::SDL3_shadercross)
+target_include_directories(AcousticFluidsCore PUBLIC src)
+target_include_directories(AcousticFluidsCore SYSTEM PUBLIC ${POCKETFFT_INCLUDE_DIRS} ${MINIAUDIO_INCLUDE_DIRS})
+target_link_libraries(AcousticFluidsCore PUBLIC SDL3::SDL3 spdlog::spdlog SDL3_shadercross::SDL3_shadercross)
 
 if(MSVC)
-    target_compile_options(AcousticFluids PRIVATE /W4 /permissive- /Zc:__cplusplus /EHsc /utf-8)
+    target_compile_options(AcousticFluidsCore PRIVATE /W4 /permissive- /Zc:__cplusplus /EHsc /utf-8)
 else()
-    target_compile_options(AcousticFluids PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(AcousticFluidsCore PRIVATE -Wall -Wextra -Wpedantic)
 endif()
+
+add_executable(AcousticFluids src/main.cpp)
+target_link_libraries(AcousticFluids PRIVATE AcousticFluidsCore)
+
+enable_testing()
+add_executable(AcousticFluidsTests tests/test_main.cpp)
+target_link_libraries(AcousticFluidsTests PRIVATE AcousticFluidsCore Catch2::Catch2WithMain)
+
+include(CTest)
+include(Catch)
+catch_discover_tests(AcousticFluidsTests)

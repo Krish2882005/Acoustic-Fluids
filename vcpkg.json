@@ -2,6 +2,7 @@
   "name": "acoustic-fluids",
   "version": "0.1.0",
   "dependencies": [
+    "catch2",
     "miniaudio",
     "pocketfft",
     "sdl3",
