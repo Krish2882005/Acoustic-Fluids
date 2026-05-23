@@ -1,5 +1,8 @@
 #pragma once
 
+struct SDL_GPUCommandBuffer;
+struct SDL_GPUTexture;
+
 namespace Graphics
 {
 struct Color
@@ -27,7 +30,7 @@ public:
     Renderer(Renderer&&) noexcept = default;
     Renderer& operator=(Renderer&&) noexcept = default;
 
-    void Draw(double alpha);
+    void Draw(SDL_GPUCommandBuffer* command, SDL_GPUTexture* sourceTexture);
 
     void SetClearColor(const Color& color);
     void SetClearColor(float r, float g, float b, float a);

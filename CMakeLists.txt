@@ -48,6 +48,8 @@ target_sources(AcousticFluidsCore PRIVATE
     src/Graphics/ShaderLibrary.cpp
     src/Graphics/TextureRegistry.hpp
     src/Graphics/TextureRegistry.cpp
+    src/Simulation/FluidSolver.hpp
+    src/Simulation/FluidSolver.cpp
 )
 
 target_include_directories(AcousticFluidsCore PUBLIC src)

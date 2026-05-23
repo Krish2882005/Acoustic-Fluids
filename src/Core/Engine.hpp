@@ -3,6 +3,19 @@
 #include <memory>
 
 #include "Config.hpp"
+#include "PhysicsTypes.hpp"
+
+namespace Audio
+{
+class AudioRingBuffer;
+class AudioDriver;
+class FFTAnalyzer;
+} // namespace Audio
+
+namespace Simulation
+{
+class FluidSolver;
+} // namespace Simulation
 
 namespace Graphics
 {
@@ -42,6 +55,8 @@ private:
     void Update(double dt);
     void Render(double alpha);
 
+    FluidPhysicsParameters m_physicsParams{};
+
     SDLContext m_sdlContext;
     Config m_config;
     bool m_isRunning = false;
@@ -49,5 +64,10 @@ private:
     std::unique_ptr<Window> m_window;
     std::unique_ptr<Graphics::GPUContext> m_gpuContext;
     std::unique_ptr<Graphics::Renderer> m_renderer;
+
+    std::unique_ptr<Simulation::FluidSolver> m_fluidSolver;
+    std::unique_ptr<Audio::AudioRingBuffer> m_audioRingBuffer;
+    std::unique_ptr<Audio::AudioDriver> m_audioDriver;
+    std::unique_ptr<Audio::FFTAnalyzer> m_fftAnalyzer;
 };
 } // namespace Core

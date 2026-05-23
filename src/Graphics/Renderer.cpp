@@ -19,14 +19,13 @@ Renderer::Renderer(GPUContext* context)
     LOG_INFO("Renderer: System initialized");
 }
 
-void Renderer::Draw(double alpha)
+void Renderer::Draw(SDL_GPUCommandBuffer* command, SDL_GPUTexture* sourceTexture)
 {
-    (void)alpha;
+    (void)sourceTexture;
 
-    SDL_GPUCommandBuffer* cmd = m_context->GetCurrentCommandBuffer();
     SDL_GPUTexture* swapchainTarget = m_context->GetSwapchainTexture();
 
-    if (!cmd || !swapchainTarget)
+    if (!command || !swapchainTarget)
     {
         return;
     }
@@ -37,7 +36,7 @@ void Renderer::Draw(double alpha)
     colorInfo.load_op = SDL_GPU_LOADOP_CLEAR;
     colorInfo.store_op = SDL_GPU_STOREOP_STORE;
 
-    SDL_GPURenderPass* pass = SDL_BeginGPURenderPass(cmd, &colorInfo, 1, nullptr);
+    SDL_GPURenderPass* pass = SDL_BeginGPURenderPass(command, &colorInfo, 1, nullptr);
     if (pass)
     {
         SDL_EndGPURenderPass(pass);
