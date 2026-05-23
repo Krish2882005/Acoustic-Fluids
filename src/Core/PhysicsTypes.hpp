@@ -2,6 +2,7 @@
 
 namespace Core
 {
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-magic-numbers, readability-magic-numbers)
 struct alignas(16) FluidPhysicsParameters
 {
     float SubBass = 0.0F;
